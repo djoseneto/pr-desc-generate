@@ -7,8 +7,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { FaCopy } from 'react-icons/fa';
 
 const Container = styled.div`
+  width: 100%;
   max-width: 600px;
-  margin: auto;
+  margin: 0;
   padding: 20px;
 `;
 
@@ -44,6 +45,8 @@ const StyledDateInput = styled(DatePicker)`
 const CopyBoxContainer = styled.div`
   position: relative;
   border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
   padding: 10px;
   width: 100%;
   margin-top: 50px;
@@ -184,14 +187,13 @@ const PrDescGenerate = () => {
       <Button onClick={() => fetchData(initialDate as Date, endDate as Date, baseUrl, projectName, token)}>GENERATE</Button>
 
       <CopyBoxContainer>
-      <textarea ref={textAreaRef} value={refs} readOnly style={{ opacity: 0, position: 'absolute', zIndex: -1 }} />
-      {isCopied && <div>Copiado!</div>}
-      <CopyIcon onClick={handleCopyClick}>
-        <FaCopy />
-      </CopyIcon>
-      <Result>{refs}</Result>
-    </CopyBoxContainer>
-      
+        <textarea ref={textAreaRef} value={refs} readOnly style={{ opacity: 0, position: 'absolute', zIndex: -1 }} />
+        {isCopied && <div>Copiado!</div>}
+        <CopyIcon onClick={handleCopyClick}>
+          <FaCopy />
+        </CopyIcon>
+        <Result>{refs}</Result>
+      </CopyBoxContainer>
     </Container>
 
   );
