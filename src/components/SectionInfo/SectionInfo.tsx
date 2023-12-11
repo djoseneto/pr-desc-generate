@@ -4,15 +4,15 @@ import { Container, Label } from './styles'
 export default function SectionInfo() {
   return (
    <Container isVisible={true}>
-      <Label>URL Base 
+      <Label>Base URL
         <span style={{color: 'grey'}}>http://url.base</span>
       </Label>
 
-      <Label>Nome do Projeto
+      <Label>Project Name
         <span style={{color: 'grey'}}>http://url.base</span>
       </Label>
 
-      <Label>Token de usuario
+      <Label>Toke
         <span style={{color: 'grey'}}>**************</span>
       </Label>
    </Container>
