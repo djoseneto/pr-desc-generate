@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import CustomInput from '../CustomInput/CustomInput';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { FaCopy } from 'react-icons/fa';
 
 const Container = styled.div`
   max-width: 600px;
@@ -40,6 +41,21 @@ const StyledDateInput = styled(DatePicker)`
   width: 100%;
 `;
 
+const CopyBoxContainer = styled.div`
+  position: relative;
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 100%;
+  margin-top: 50px;
+`;
+
+const CopyIcon = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+`;
+
 
 const PrDescGenerate = () => {
   const [initialDate, setInitialDate] = useState<Date>();
@@ -49,6 +65,21 @@ const PrDescGenerate = () => {
   const [token, setToken] = useState('');
   const [step, setStep] = useState(0);
   const [refs, setRefs] = useState('');
+
+  const textAreaRef = useRef(null);
+  const [isCopied, setIsCopied] = useState(false);
+
+  const handleCopyClick = () => {
+    if (textAreaRef.current) {
+      textAreaRef.current.select();
+      document.execCommand('copy');
+      setIsCopied(true);
+
+      setTimeout(() => {
+        setIsCopied(false);
+      }, 1000);
+    }
+  };
 
   const fetchData = async (initialDate: Date, endDate: Date, baseUrl: string, projectName: string, token: string ) => {
 
@@ -152,7 +183,15 @@ const PrDescGenerate = () => {
       {sectionStep(step)}
       <Button onClick={() => fetchData(initialDate as Date, endDate as Date, baseUrl, projectName, token)}>GENERATE</Button>
 
+      <CopyBoxContainer>
+      <textarea ref={textAreaRef} value={refs} readOnly style={{ opacity: 0, position: 'absolute', zIndex: -1 }} />
+      {isCopied && <div>Copiado!</div>}
+      <CopyIcon onClick={handleCopyClick}>
+        <FaCopy />
+      </CopyIcon>
       <Result>{refs}</Result>
+    </CopyBoxContainer>
+      
     </Container>
 
   );

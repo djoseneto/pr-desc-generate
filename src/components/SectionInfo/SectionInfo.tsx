@@ -1,4 +1,3 @@
-import React from 'react'
 import { Container, Label } from './styles'
 
 export default function SectionInfo() {
@@ -12,7 +11,7 @@ export default function SectionInfo() {
         <span style={{color: 'grey'}}>http://url.base</span>
       </Label>
 
-      <Label>Toke
+      <Label>Token
         <span style={{color: 'grey'}}>**************</span>
       </Label>
    </Container>

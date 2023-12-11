@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div<{isVisible: boolean}>`
-    max-width: 50%;
+    max-width: 49%;
     height: auto;
     border: 1px solid #DADADA;
     border-radius: 4px;
