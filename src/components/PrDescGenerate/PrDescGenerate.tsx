@@ -5,6 +5,7 @@ import CustomInput from '../CustomInput/CustomInput';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FaCopy } from 'react-icons/fa';
+import { format } from 'date-fns';
 
 const Container = styled.div`
   width: 100%;
@@ -87,8 +88,10 @@ const PrDescGenerate = () => {
   const fetchData = async (initialDate: Date, endDate: Date, baseUrl: string, projectName: string, token: string ) => {
 
     
+    const initialDateFormat = format(initialDate, 'yyyy-MM-dd');
+    const endDateFormat = format(endDate, 'yyyy-MM-dd');
 
-    const apiUrl = `${baseUrl}/${projectName}/_apis/git/repositories/3ad99fb9-4d3b-4e2d-8edf-c5b80242743f/pullrequests?searchCriteria.status=completed&api-version=7.1-preview.1&searchCriteria.maxTime=${initialDate}T23:59:59&searchCriteria.minTime=${endDate}T00:00:00`;
+    const apiUrl = `${baseUrl}/${projectName}/_apis/git/repositories/3ad99fb9-4d3b-4e2d-8edf-c5b80242743f/pullrequests?searchCriteria.status=completed&api-version=7.1-preview.1&searchCriteria.maxTime=${endDateFormat}T23:59:59&searchCriteria.minTime=${initialDateFormat}T00:00:00`;
     const authorization = 'Basic ' + btoa(':' + token);
 
     const headers = {
@@ -125,6 +128,7 @@ const PrDescGenerate = () => {
   ({
     0: ( 
         <CustomInput 
+          key='0'
           isVisible={true} 
           label='Url Base' 
           placeholder='Inform a URL Base' 
@@ -135,6 +139,7 @@ const PrDescGenerate = () => {
       ),
       1: ( 
         <CustomInput 
+          key='1'
           isVisible={true} 
           label='Nome do Projeto' 
           placeholder='Informe o nome do projeto' 
@@ -145,6 +150,7 @@ const PrDescGenerate = () => {
       ),
       2: ( 
         <CustomInput 
+          key='2'
           isVisible={true} 
           label='Token de usuario' 
           placeholder='Informe o token de acesso' 
