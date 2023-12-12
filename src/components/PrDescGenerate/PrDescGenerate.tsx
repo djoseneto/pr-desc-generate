@@ -70,7 +70,7 @@ const PrDescGenerate = () => {
   const [step, setStep] = useState(0);
   const [refs, setRefs] = useState('');
 
-  const textAreaRef = useRef(null);
+  const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
   const [isCopied, setIsCopied] = useState(false);
 
   const handleCopyClick = () => {
